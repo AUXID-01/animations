@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Animation Demo — External CSS</title>
+  <link rel="stylesheet" href="styles.css" />
+   <script src="script.js" defer></script>
+</head>
+<body>
+  <main>
+    <h1>Animations: Transition vs Keyframes</h1>
+
+    <section class="grid">
+      <!-- Transition example (hover) -->
+      <div class="card">
+        <h2>Transition (hover)</h2>
+        <div class="box box-hover" id="boxTransition"></div>
+        <p class="hint">Hover the box to see a transition</p>
+      </div>
+
+      <!-- Keyframes example (auto animation) -->
+      <div class="card">
+        <h2>Keyframes (loop)</h2>
+        <div class="box box-keyframes" id="boxKeyframes"></div>
+        <p class="hint">This one runs continuously (animation)</p>
+      </div>
+
+      <!-- Console control example -->
+      <div class="card">
+        <h2>Control from Console</h2>
+        <div class="box box-keyframes paused" id="boxConsole"></div>
+        <p class="hint">
+          The paused box shows how you can toggle play/pause from DevTools console
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      <small>Open DevTools (F12) → Console. Try commands shown in the CSS file or below.</small>
+    </footer>
+  </main>
+</body>
+</html>

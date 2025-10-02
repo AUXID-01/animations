@@ -1,0 +1,94 @@
+/* === Reset & base === */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html,body { height: 100%; }
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(180deg,#f7f8fa,#eef2f6);
+  color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+}
+
+/* === Layout === */
+main { width: 100%; max-width: 980px; }
+h1 { margin-bottom: 20px; font-size: 1.4rem; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));  /*responsive columns: each card at least 260px wide, otherwise it fills equally.*/
+  gap: 18px;
+}
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 6px 18px rgba(15,20,30,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+.card h2 { font-size: 1rem; font-weight: 600; }
+
+/* === Box base === */
+.box {
+  width: 110px;
+  height: 110px;
+  border-radius: 10px;
+  background: coral;
+  display: block;
+  /* create a transform context to animate translate/scale/rotate */
+  will-change: transform, background-color, opacity;  /*hint to browser: “These properties will animate, optimize them.”*/
+}
+
+/* === Transition example (on hover) ===
+   transition: property duration timing-function delay
+*/
+.box-hover {
+  transition: transform 450ms cubic-bezier(.2,.9,.2,1),
+              background-color 350ms ease,      /*ease -> a standard easing that starts slow, speeds up, then slows at the end.*/
+              box-shadow 350ms ease;
+  box-shadow: 0 8px 18px rgba(12,16,20,0.06);
+  cursor: pointer;
+}
+.box-hover:hover {
+  transform: translateY(-18px) rotate(-6deg) scale(1.08);
+  background-color: #7de3b8; /* changes smoothly */
+  box-shadow: 0 18px 30px rgba(12,16,20,0.12);
+}
+
+/* === Keyframes example (continuous animation) ===
+   animation: name duration timing-function delay iteration-count direction fill-mode play-state
+*/
+@keyframes float-slide {
+  0%   { transform: translateX(0) translateY(0) rotate(0deg); }
+  25%  { transform: translateX(30px) translateY(-12px) rotate(3deg); }
+  50%  { transform: translateX(0) translateY(-6px) rotate(-3deg); }
+  75%  { transform: translateX(-30px) translateY(-12px) rotate(3deg); }
+  100% { transform: translateX(0) translateY(0) rotate(0deg); }
+}
+
+/* runs infinitely, alternate makes it go back-and-forth */
+.box-keyframes {
+  animation: float-slide 3.2s ease-in-out infinite alternate;
+  background: #6fb3ff;
+}
+
+/* === Play/Pause helper for console control ===
+   .paused sets animation-play-state to paused so we can toggle by class
+*/
+.box-keyframes.paused { animation-play-state: paused; }
+
+/* === Small hints below each card === */
+.hint {
+  font-size: 0.86rem;
+  color: #666;
+  text-align: center;
+  margin-top: 4px;
+}
+
+/* responsive tweak */
+@media (max-width:480px) {
+  .box { width: 90px; height: 90px; }
+}
